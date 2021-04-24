@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-
+const {initUsers} = require('./common/utils')
 const index = require('./routes/index');
 
 const app = express();
@@ -19,6 +19,8 @@ db.on('error', console.error);
 db.once('open', function () {
     console.log("Connected to mongod server")
 });
+
+initUsers()
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
