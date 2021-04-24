@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-
+const mongoose = require('mongoose');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -8,6 +8,17 @@ const bodyParser = require('body-parser');
 const index = require('./routes/index');
 
 const app = express();
+
+// mongoDB connect
+mongoose.connect('mongodb://localhost/chatbot', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+const db = mongoose.connection;
+db.on('error', console.error);
+db.once('open', function () {
+    console.log("Connected to mongod server")
+});
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -34,7 +45,7 @@ app.use(function(err, req, res, next) {
   res.json({ err });
 });
 
-app.listen(process.env.PORT || 3000, () => console.log('Example app listening on port 3000!'));
+app.listen(process.env.PORT || 3000, () => console.log('ChatBot app listening on port 3000!'));
 
 module.exports = app;
 
