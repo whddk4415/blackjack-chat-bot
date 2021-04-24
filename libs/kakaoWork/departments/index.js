@@ -8,8 +8,8 @@ exports.getDepartmentList = async ({ limit = null, cursor = null } = {}) => {
       (cursor ? `cursor=${cursor}` : ''),
   );
 
-  if (!res.success) {
-    throw new errorCode[res.error.code](res.error.message);
+  if (!res.data.success) {
+    throw new Error(res.data.error.message);
   }
 
   return res.data;

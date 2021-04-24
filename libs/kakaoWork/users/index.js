@@ -7,21 +7,24 @@ exports.getUserList = async ({ limit = null, cursor = null } = {}) => {
       (limit ? `limit=${limit}&` : '') +
       (cursor ? `cursor=${cursor}` : ''),
   );
+  if (!res.data.success) {
+    throw new Error(res.data.error.message);
+  }
   return res.data;
 };
 
 exports.getUserById = async ({ userId }) => {
   const res = await kakaoInstance.get(`/v1/users.info?userId=${userId}`);
-  if (!res.success) {
-    throw new errorCode[res.error.code](res.error.message);
+  if (!res.data.success) {
+    throw new Error(res.data.error.message);
   }
   return res.data.user;
 };
 
 exports.getUserByEmail = async ({ email }) => {
   const res = await kakaoInstance.get(`/v1/users.find_by_email?email=${email}`);
-  if (!res.success) {
-    throw new errorCode[res.error.code](res.error.message);
+  if (!res.data.success) {
+    throw new Error(res.data.error.message);
   }
   return res.data.user;
 };
@@ -30,8 +33,8 @@ exports.getUserByPhoneNumber = async ({ phone_number }) => {
   const res = await kakaoInstance.get(
     `/v1/users.find_by_phone_number?phone_number=${phone_number}`,
   );
-  if (!res.success) {
-    throw new errorCode[res.error.code](res.error.message);
+  if (!res.data.success) {
+    throw new Error(res.data.error.message);
   }
   return res.data.user;
 };
@@ -43,8 +46,8 @@ exports.setWorkTime = async ({ userId, workStartTime, workEndTime }) => {
     work_end_time: workEndTime,
   };
   const res = await kakaoInstance.post('/v1/user.set_work_time ', data);
-  if (!res.success) {
-    throw new errorCode[res.error.code](res.error.message);
+  if (!res.data.success) {
+    throw new Error(res.data.error.message);
   }
 };
 
@@ -59,7 +62,7 @@ exports.setVacationTime = async ({
     vacation_end_time: vacationEndTime,
   };
   const res = await kakaoInstance.post('/v1/users.set_vacation_time', data);
-  if (!res.success) {
-    throw new errorCode[res.error.code](res.error.message);
+  if (!res.data.success) {
+    throw new Error(res.data.error.message);
   }
 };

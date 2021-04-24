@@ -8,8 +8,8 @@ exports.sendMessage = async ({ conversationId, text, blocks }) => {
     ...(blocks && { blocks }),
   };
   const res = await kakaoInstance.post('/v1/messages.send', data);
-  if (!res.success) {
-    throw new errorCode[res.error.code](res.error.message);
+  if (!res.data.success) {
+    throw new Error(res.data.error.message);
   }
   return res.data.message;
 };
