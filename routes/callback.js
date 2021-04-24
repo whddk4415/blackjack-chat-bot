@@ -180,6 +180,54 @@ router.post('/', async (req, res, next) => {
         ],
       });
       break;
+    case 'callSetAlarmIntroMessage':
+      messages.sendMessage({
+        conversationId,
+        text: '날씨 알람 설정',
+        blocks: [
+          {
+            type: 'header',
+            text: '날씨 알람 설정',
+            style: 'blue',
+          },
+          {
+            type: 'text',
+            text:
+              '날씨 알람 설정. 날씨 알람 설정. 날씨 알람 설정. 날씨 알람 설정. 날씨 알람 설정.',
+            markdown: true,
+          },
+          {
+            type: 'button',
+            text: `Daily 알람 ${user.daily_alarm ? 'OFF' : 'ON'}`,
+            style: 'default',
+            action_type: 'call_modal',
+            action_name: 'callDailyAlarmSettingModal',
+            value: 'callDailyAlarmSettingModal',
+          },
+          {
+            type: 'action',
+            elements: [
+              {
+                type: 'button',
+                text: `비오는 날 ${user.rain_alarm ? 'OFF' : 'ON'}`,
+                style: 'primary',
+                action_type: 'submit_action',
+                action_name: 'callRainAlarmSetResultMessage',
+                value: 'callRainAlarmSetResultMessage',
+              },
+              {
+                type: 'button',
+                text: `미세먼지 ${user.dust_alarm ? 'OFF' : 'ON'}`,
+                style: 'danger',
+                action_type: 'submit_action',
+                action_name: 'callDustAlarmSetResultMessage',
+                value: 'callDustAlarmSetResultMessage',
+              },
+            ],
+          },
+        ],
+      });
+      break;
     default:
   }
   res.json({ result: true });
