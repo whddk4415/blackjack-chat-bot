@@ -268,6 +268,24 @@ router.post('/', async (req, res, next) => {
         ],
       });
       break;
+    case 'callDailyAlarmSetResultMessage':
+      messages.sendMessage({
+        conversationId,
+        text: '날씨 알람 설정',
+        blocks: [
+          {
+            type: 'header',
+            text: '날씨 알람 설정',
+            style: 'blue',
+          },
+          {
+            type: 'text',
+            text: `날씨 알람이 ${actions.alarmTime}으로 설정되었습니다.`,
+            markdown: true,
+          },
+        ],
+      });
+      break;
     default:
   }
   res.json({ result: true });
