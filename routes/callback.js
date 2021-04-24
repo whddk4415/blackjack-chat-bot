@@ -110,6 +110,76 @@ router.post('/', async (req, res, next) => {
         ],
       });
       break;
+    case 'callWhatIsTheWeatherTodayMessage':
+      messages.sendMessage({
+        conversationId,
+        text: '오늘 어때?',
+        blocks: [
+          {
+            type: 'header',
+            text: '오늘 어때',
+            style: 'blue',
+          },
+          {
+            type: 'description',
+            term: '최저온도',
+            content: {
+              type: 'text',
+              text: `${'17도'}`,
+              markdown: false,
+            },
+            accent: true,
+          },
+          {
+            type: 'description',
+            term: '최고온도',
+            content: {
+              type: 'text',
+              text: `${'17도'}`,
+              markdown: false,
+            },
+            accent: true,
+          },
+          {
+            type: 'description',
+            term: '체감온도', // 최저 + 최고 의 평균 온도
+            content: {
+              type: 'text',
+              text: `${'15도'}`,
+              markdown: false,
+            },
+            accent: true,
+          },
+          {
+            type: 'description',
+            term: '미세먼지',
+            content: {
+              type: 'text',
+              text: `${'나쁨'}`,
+              markdown: false,
+            },
+            accent: true,
+          },
+          {
+            type: 'divider',
+          },
+          {
+            type: 'text',
+            text: '*추천 옷차림*',
+            markdown: true,
+          },
+          {
+            type: 'image_link',
+            url: `${'https://t1.kakaocdn.net/kakaowork/resources/block-kit/imagelink/image7@3x.jpg'}`,
+          },
+          {
+            type: 'text',
+            text: `${'자켓, 가디건, 야상, 스타킹, 청바지, 면바지'}`,
+            markdown: false,
+          },
+        ],
+      });
+      break;
     default:
   }
   res.json({ result: true });
