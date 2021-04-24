@@ -228,6 +228,26 @@ router.post('/', async (req, res, next) => {
         ],
       });
       break;
+    case 'callRainAlarmSetResultMessage':
+      messages.sendMessage({
+        conversationId,
+        text: '비오는 날 알람 설정',
+        blocks: [
+          {
+            type: 'header',
+            text: '비오는 날 알람 설정',
+            style: 'blue',
+          },
+          {
+            type: 'text',
+            text: `비오는 날 알람이 ${
+              user.rain_alarm ? '설정' : '해제'
+            } 되었습니다. 매일 07:00에 알람이 옴`,
+            markdown: true,
+          },
+        ],
+      });
+      break;
     default:
   }
   res.json({ result: true });
