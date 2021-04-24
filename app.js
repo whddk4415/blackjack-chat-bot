@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const {initUsers} = require('./common/utils')
 const index = require('./routes/index');
+const request = require('./routes/request')
+const callback = require('./routes/callback')
 
 const app = express();
 
@@ -28,7 +30,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', index);
-
+app.use('/request', request);
+app.use('/callback', callback);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
