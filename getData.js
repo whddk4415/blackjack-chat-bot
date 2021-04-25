@@ -19,14 +19,14 @@ for (var i in city_data) {
 
 exports.get = async (local)=>{
 	var lat, lon;
-	// local이 
 	for (var city of city_data){
 		if (city["kor"] == local){
 			lat = city["lat"];
 			lon = city["lon"];
 		}
 	}
-	const key = "dfc11afdacf7e5d8019f61313ae5a2ff";
+	const Config = require('config');
+	const key = `${Config.keys.weather.key}`;
 	// 날씨 api
 	var temp_url = "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&appid="+key;
 	// 미세먼지 api
@@ -79,6 +79,5 @@ exports.get = async (local)=>{
 		"rain":rain,			// 최근 1시간 강수량(mm)
 		"img":"http://openweathermap.org/img/w/"+temp_data["weather"][0].icon+".png"
 	};
-	console.log(obj);
 	return obj;
 }
