@@ -17,7 +17,7 @@ for (var i in city_data) {
 	};
 }
 
-exports.get = async (local)=>{
+exports.getWeather = async (local)=>{
 	var lat, lon;
 	for (var city of city_data){
 		if (city["kor"] == local){
@@ -80,4 +80,41 @@ exports.get = async (local)=>{
 		"img":"http://openweathermap.org/img/w/"+temp_data["weather"][0].icon+".png"
 	};
 	return obj;
+}
+
+exports.getClothes = function (temp) {
+	
+	if (isNaN(temp)){
+		console.error('체감온도의 타입이 적절치 않습니다');
+		return false;
+	}
+	temp = parseFloat(temp);
+	
+	var clothes = [];
+	if (temp >= 28){
+		clothes = ["민소매", "반팔", "반바지", "원피스"];
+	}
+	else if (temp >= 23){
+		clothes = ["반팔", "얇은 셔츠", "반바지", "면바지"];
+	}
+	else if (temp >= 20){
+		clothes = ["얇은 가디건", "긴팔", "면바지", "청바지"];
+	}
+	else if (temp >= 17){
+		clothes = ["얇은 니트", "맨투맨", "가디건", "청바지"];
+	}
+	else if (temp >= 12){
+		clothes = ["자켓", "가디건", "야상", "스타킹", "청바지", "면바지"];
+	}
+	else if (temp >=9){
+		clothes = ["자켓", "트랜치코트", "야상", "니트", "청바지", "스타킹"];
+	}
+	else if (temp >= 5){
+		clothes = ["코트", "가죽자켓", "히트텍", "니트", "레깅스"];
+	}
+	else {
+		clothes = ["패딩", "두꺼운코트", "목도리", "기모제품"];
+	}
+	
+	return clothes;
 }
