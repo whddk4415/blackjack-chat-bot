@@ -6,6 +6,7 @@ const {
 } = require('../../controller/weathers');
 const dateFormat = require('dateformat');
 const { getWeather, getCityData } = require('../../libs/weather');
+const schedule = require('node-schedule');
 
 exports.initUsers = async (userId, conversationId) => {
   if (!(await detail({ user_id: userId }))) {
@@ -14,7 +15,7 @@ exports.initUsers = async (userId, conversationId) => {
       rain_alarm: false,
       dust_alarm: false,
       daily_alarm: false,
-      city: null, 
+      city: null,
       conversation_id: conversationId,
     });
   }
@@ -35,3 +36,9 @@ const initWeather = async () => {
 };
 
 exports.initWeather = initWeather;
+
+exports.getWeatherPerHour = async () => {
+  const job = schedule.scheduleJob({ minute: 0 }, async () => {
+    initWeather();
+  });
+};
