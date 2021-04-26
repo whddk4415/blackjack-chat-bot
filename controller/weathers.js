@@ -22,6 +22,7 @@ const create = async (data) => {
       today_feels_like,
       pm10_status,
       pm2_5_status,
+      is_rainy,
     } = data;
     const weather = new WeatherModel({
       time,
@@ -33,6 +34,7 @@ const create = async (data) => {
       today_feels_like,
       pm10_status,
       pm2_5_status,
+      is_rainy,
     });
     const output = await weather.save();
     return output;
