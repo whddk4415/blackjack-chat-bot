@@ -1,26 +1,26 @@
-const fs = require('fs');
-// 파일 읽기
-const city_data = fs.readFileSync('kor_city.txt', 'utf8').split('\n');
-const Config = require('config');
-const axios = require('axios');
+exports.getCityData = () => {
+  const fs = require('fs');
+  // 파일 읽기
+  const cityData = fs
+    .readFileSync('kor_city.txt', 'utf8')
+    .split('\n')
+    .map((v) => {
+      const [kor, eng, lat, lon] = v.replace('\r', '').split(' ');
+      // 각 요소별 object를 만듦
+      return {
+        kor,
+        eng,
+        lat,
+        lon,
+      };
+    });
 
-// 엔터 삭제
-for (let i in city_data) {
-  // 이스케이프 문자 삭제
-  city_data[i] = city_data[i].replace('\r', '');
-  // 공백으로 나눔
-  city_data[i] = city_data[i].split(' ');
-  // 각 요소별 object를 만듬
-  city_data[i] = {
-    kor: city_data[i][0],
-    eng: city_data[i][1],
-    lat: city_data[i][2],
-    lon: city_data[i][3],
-  };
-}
+  return cityData;
+};
 
 exports.getWeather = async (local) => {
-  const { lat, lon } = city_data.find((city) => city.kor == local);
+  const cityData = getCityData();
+  const { lat, lon } = cityData.find((city) => city.kor == local);
 
   if (lat == 0 && lon == 0) {
     console.log('유효하지 않은 지명입니다.');

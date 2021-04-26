@@ -1,20 +1,8 @@
-const fs = require('fs');
-// 파일 읽기
-const city_data = fs
-  .readFileSync('kor_city.txt', 'utf8')
-  .split('\n')
-  .map((v) => {
-    const [kor, eng, lat, lon] = v.replace('\r', '').split(' ');
-    // 각 요소별 object를 만듦
-    return {
-      kor,
-      eng,
-      lat,
-      lon,
-    };
-  });
+const { getCityData } = require('../../getData');
 
 exports.sendCitySettingModal = (res) => {
+  const cityData = getCityData();
+
   return res.json({
     view: {
       title: '도시 설정',
@@ -31,7 +19,7 @@ exports.sendCitySettingModal = (res) => {
           type: 'select',
           name: 'selectedCity',
           required: true,
-          options: city_data.map(({ kor }) => ({
+          options: cityData.map(({ kor }) => ({
             text: kor,
             value: kor,
           })),
