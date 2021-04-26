@@ -79,7 +79,6 @@ router.post('/', async (req, res, next) => {
         const updatedUser = await detail({
           user_id: react_user_id,
         });
-        console.log(updatedUser);
         await sendRainAlarmSetResultMessage(conversationId, updatedUser);
         sendSetAlarmIntroMessage(conversationId, updatedUser);
       }
