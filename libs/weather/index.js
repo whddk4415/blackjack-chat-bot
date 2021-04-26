@@ -1,4 +1,7 @@
-exports.getCityData = () => {
+const Config = require('config');
+const axios = require('axios');
+
+const getCityData = () => {
     const fs = require('fs');
     // 파일 읽기
     const cityData = fs
@@ -17,6 +20,8 @@ exports.getCityData = () => {
   
     return cityData;
   };
+
+  exports.getCityData = getCityData;
   
   exports.getWeather = async (local) => {
     const cityData = getCityData();
