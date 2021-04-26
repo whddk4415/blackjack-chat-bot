@@ -452,3 +452,127 @@ exports.sendDustAlarmSetResultMessage = async (
     ],
   });
 };
+
+exports.sendDailyAlarmMessage = async (conversationId) => {
+  //@TODO: 날씨 정보 데이터 받아오기
+  await messages.sendMessage({
+    conversationId,
+    text: '오늘 어때?',
+    blocks: [
+      {
+        type: 'header',
+        text: '오늘 어때',
+        style: 'blue',
+      },
+      {
+        type: 'description',
+        term: '최저기온',
+        content: {
+          type: 'text',
+          text: `${'temp_min'}°C`,
+          markdown: false,
+        },
+        accent: true,
+      },
+      {
+        type: 'description',
+        term: '최고기온',
+        content: {
+          type: 'text',
+          text: `${'temp_max'}°C`,
+          markdown: false,
+        },
+        accent: true,
+      },
+      {
+        type: 'description',
+        term: '체감온도',
+        content: {
+          type: 'text',
+          text: `${'today_feels_like'}°C`,
+          markdown: false,
+        },
+        accent: true,
+      },
+      {
+        type: 'divider',
+      },
+      {
+        type: 'text',
+        text: '*추천 옷차림*',
+        markdown: true,
+      },
+      {
+        type: 'image_link',
+        url: 'img',
+      },
+      {
+        type: 'text',
+        text: text.join(' '),
+        markdown: false,
+      },
+    ],
+  });
+};
+
+exports.sendRainAlarmMessage = async (conversationId) => {
+  //@TODO: 비 정보 데이터 받아오기
+  //임시 변수
+  const isRainy = true;
+  await messages.sendMessage({
+    conversationId,
+    text: '오늘의 비 소식',
+    blocks: [
+      {
+        type: 'header',
+        text: '오늘의 비 소식',
+        style: 'blue',
+      },
+      {
+        type: 'text',
+        text: '🗣 오늘의 비 소식입니다.',
+        markdown: true,
+      },
+      {
+        type: 'text',
+        text: isRainy
+          ? '오늘은 *비가 오겠습니다.*\n우산을 챙겨서 외출하세요!'
+          : '오늘은 *비가 오지 않겠습니다.*',
+        markdown: true,
+      },
+    ],
+  });
+};
+
+exports.sendDustAlarmMessage = async (conversationId) => {
+  //@TODO: 미세먼지 정보 데이터 받아오기
+  //임시 변수
+  const pm10_status = '아주 나쁨';
+  const pm2_5_status = '나쁨';
+  await messages.sendMessage({
+    conversationId,
+    text: '오늘의 미세먼지 소식',
+    blocks: [
+      {
+        type: 'header',
+        text: '오늘의 미세먼지 소식',
+        style: 'blue',
+      },
+      {
+        type: 'text',
+        text: '🗣 오늘의 미세먼지 소식입니다.',
+        markdown: true,
+      },
+      {
+        type: 'text',
+        text: `- *미세먼지 상태: ${pm10_status}*`,
+        markdown: true,
+      },
+      {
+        type: 'text',
+        text: `- *초미세먼지 상태: ${pm2_5_status}*`,
+        markdown: true,
+      },
+    ],
+  });
+};

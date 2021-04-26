@@ -19,12 +19,10 @@ router.post('/', async (req, res, next) => {
   const { conversation_id: conversationId } = message;
 
   switch (value) {
-    case 'callWhatIsTheWeatherIntroMessage':
-      sendWhatIsTheWeatherIntroMessage(conversationId);
-      break;
     case 'callIntroMessage':
       sendIntroMessage(conversationId);
       break;
+
     case 'callCitySetResultMessage':
       {
         const city = actions.selectedCity;
@@ -33,6 +31,11 @@ router.post('/', async (req, res, next) => {
         sendIntroMessage(conversationId);
       }
       break;
+
+    case 'callWhatIsTheWeatherIntroMessage':
+      sendWhatIsTheWeatherIntroMessage(conversationId);
+      break;
+
     case 'callWhatIsTheWeatherNowMessage':
       {
         const { city } = await detail({ user_id: react_user_id });
@@ -40,6 +43,7 @@ router.post('/', async (req, res, next) => {
         sendWhatIsTheWeatherIntroMessage(conversationId);
       }
       break;
+
     case 'callWhatIsTheWeatherTodayMessage':
       {
         const { city } = await detail({ user_id: react_user_id });
@@ -47,6 +51,7 @@ router.post('/', async (req, res, next) => {
         sendWhatIsTheWeatherIntroMessage(conversationId);
       }
       break;
+
     case 'callSetAlarmIntroMessage':
       {
         sendSetAlarmIntroMessage(
@@ -57,6 +62,7 @@ router.post('/', async (req, res, next) => {
         );
       }
       break;
+
     case 'callDailyAlarmSetResultMessage':
       {
         const { daily_alarm: prevDailyAlarm } = await detail({
@@ -70,6 +76,7 @@ router.post('/', async (req, res, next) => {
         sendSetAlarmIntroMessage(conversationId, updatedUser);
       }
       break;
+
     case 'callRainAlarmSetResultMessage':
       {
         const { rain_alarm: prevRainAlarm } = await detail({
@@ -83,18 +90,32 @@ router.post('/', async (req, res, next) => {
         sendSetAlarmIntroMessage(conversationId, updatedUser);
       }
       break;
-    case 'callDustAlarmSetResultMessage': {
-      const { dust_alarm: prevDustAlarm } = await detail({
-        user_id: react_user_id,
-      });
-      await update(react_user_id, { dust_alarm: !prevDustAlarm });
-      const updatedUser = await detail({
-        user_id: react_user_id,
-      });
-      await sendDustAlarmSetResultMessage(conversationId, updatedUser);
-      sendSetAlarmIntroMessage(conversationId, updatedUser);
+
+    case 'callDustAlarmSetResultMessage':
+      {
+        const { dust_alarm: prevDustAlarm } = await detail({
+          user_id: react_user_id,
+        });
+        await update(react_user_id, { dust_alarm: !prevDustAlarm });
+        const updatedUser = await detail({
+          user_id: react_user_id,
+        });
+        await sendDustAlarmSetResultMessage(conversationId, updatedUser);
+        sendSetAlarmIntroMessage(conversationId, updatedUser);
+      }
       break;
-    }
+
+    case 'callDailyAlarmMessage':
+      sendDailyAlarmMessage(conversationId);
+      break;
+
+    case 'callRainAlarmMessage':
+      sendRainAlarmMessage(conversationId);
+      break;
+
+    case 'callDustAlarmMessage':
+      sendDustAlarmMessage(conversationId);
+      break;
     default:
       break;
   }
