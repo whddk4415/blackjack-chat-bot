@@ -1,9 +1,9 @@
 const UserModel = require('../models/user');
 
 // 전체 유저 데이터 조회
-const list = async () => {
+const list = async (search = null) => {
   try {
-    const allUser = await UserModel.find({});
+    const allUser = await UserModel.find(search ? search : {});
     return allUser;
   } catch (e) {
     console.error(e);
