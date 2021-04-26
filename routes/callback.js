@@ -30,7 +30,7 @@ router.post('/', async (req, res, next) => {
         const city = actions.selectedCity;
         await update(react_user_id, { city });
         await sendCitySetResultMessage(conversationId, city);
-        sendWhatIsTheWeatherIntroMessage(conversationId);
+        sendIntroMessage(conversationId);
       }
       break;
     case 'callWhatIsTheWeatherNowMessage':
@@ -96,6 +96,7 @@ router.post('/', async (req, res, next) => {
       break;
     }
     default:
+      break;
   }
   res.json({ result: true });
 });
