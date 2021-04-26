@@ -1,4 +1,4 @@
-const { detail, update } = require('../../controller/users');
+const { detail } = require('../../controller/users');
 const messages = require('../kakaoWork/messages');
 const { getWeather, getClothes } = require('../../getData');
 
@@ -21,17 +21,18 @@ exports.sendIntroMessage = async (conversationId) => {
       },
       {
         type: 'text',
-        text: 'SWM 날씨 챗봇에 오신 여러분 환영합니다.',
+        text:
+          'SWM 날씨 챗봇에 오신 여러분 환영합니다. 다음 기능을 이용하기 전, 도시를 먼저 설정해주세요.',
         markdown: true,
       },
       {
         type: 'text',
-        text: '1. 날씨 어때? : 날씨에 대해 알아보세요.',
+        text: '*1. 날씨 어때?* : 날씨에 대해 알아보세요.',
         markdown: true,
       },
       {
         type: 'text',
-        text: '2. 알람 설정 : 날씨 알림을 받아보세요.',
+        text: '*2. 알람 설정* : 날씨 알림을 받아보세요.',
         markdown: true,
       },
       {
@@ -60,6 +61,17 @@ exports.sendIntroMessage = async (conversationId) => {
             value: city ? 'callSetAlarmIntroMessage' : 'callCitySettingModal',
           },
         ],
+      },
+      {
+        type: 'divider',
+      },
+      {
+        type: 'button',
+        text: `도시 ${city ? '재' : ''}설정`,
+        style: 'default',
+        action_type: 'call_modal',
+        action_name: 'callCitySettingModal',
+        value: 'callCitySettingModal',
       },
     ],
   });
@@ -113,6 +125,9 @@ exports.sendWhatIsTheWeatherIntroMessage = (conversationId) => {
         ],
       },
       {
+        type: 'divider',
+      },
+      {
         type: 'button',
         text: '🏠',
         style: 'default',
@@ -136,7 +151,7 @@ exports.sendCitySetResultMessage = async (conversationId, city) => {
       },
       {
         type: 'text',
-        text: `도시가 ${city}로 설정되었습니다.`,
+        text: `도시가 *${city}*로 설정되었습니다.`,
         markdown: true,
       },
     ],
