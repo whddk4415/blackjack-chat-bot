@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const index = require('./routes/index');
 const request = require('./routes/request');
 const callback = require('./routes/callback');
-
+const { initWeather, getWeatherPerHour } = require('./common/utils');
 const app = express();
 
 // mongoDB connect
@@ -15,12 +15,15 @@ mongoose.connect('mongodb://localhost/chatbot', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-mongoose.set('useCreateIndex', true)
+mongoose.set('useCreateIndex', true);
 const db = mongoose.connection;
 db.on('error', console.error);
 db.once('open', function () {
   console.log('Connected to mongod server');
 });
+
+initWeather();
+getWeatherPerHour();
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
