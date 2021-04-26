@@ -1,6 +1,8 @@
 const { detail } = require('../../controller/users');
 const messages = require('../kakaoWork/messages');
-const { getWeather, getClothes } = require('../weather');
+const { detail: getWeather } = require('../../controller/weathers');
+const { getClothes } = require('../weather');
+const dateFormat = require('dateformat');
 
 exports.sendIntroMessage = async (conversationId) => {
   const { city } = await detail({ conversation_id: conversationId });
@@ -160,6 +162,7 @@ exports.sendCitySetResultMessage = async (conversationId, city) => {
 
 exports.sendWhatIsTheWeatherNowMessage = async (conversationId, city) => {
   const { temp, feels_like, pm10_status, pm2_5_status } = await getWeather(
+    dateFormat(new Date(), 'yyyy-mm-dd HH'),
     city,
   );
 
@@ -241,7 +244,7 @@ exports.sendWhatIsTheWeatherTodayMessage = async (conversationId, city) => {
     today_feels_like,
     pm10_status,
     pm2_5_status,
-  } = await getWeather(city);
+  } = await getWeather(dateFormat(new Date(), 'yyyy-mm-dd HH'), city);
   const { text, img } = getClothes(today_feels_like);
 
   await messages.sendMessage({
