@@ -15,6 +15,7 @@ mongoose.connect('mongodb://localhost/chatbot', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+mongoose.set('useCreateIndex', true)
 const db = mongoose.connection;
 db.on('error', console.error);
 db.once('open', function () {
