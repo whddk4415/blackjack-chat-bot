@@ -1,4 +1,7 @@
-exports.getCityData = () => {
+const Config = require('config');
+const axios = require('axios');
+
+const getCityData = () => {
   const fs = require('fs');
   // 파일 읽기
   const cityData = fs
@@ -17,6 +20,8 @@ exports.getCityData = () => {
 
   return cityData;
 };
+
+exports.getCityData = getCityData;
 
 exports.getWeather = async (local) => {
   const cityData = getCityData();
@@ -77,7 +82,7 @@ exports.getWeather = async (local) => {
     feels_like, // 체감온도(C)
     pm2_5_status, // 초미세먼지(μg/m3)
     pm10_status, // 미세먼지(μg/m3)
-    isRain: rain > 0, // 오늘 비가 오는지 여부
+    is_rainy: rain > 0, // 오늘 비가 오는지 여부
     img: 'http://openweathermap.org/img/w/' + current.weather[0].icon + '.png', // 날씨 아이콘
   };
 };

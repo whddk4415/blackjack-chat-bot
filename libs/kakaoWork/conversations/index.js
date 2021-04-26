@@ -25,12 +25,16 @@ exports.openConversations = async ({ userId }) => {
   return res.data.conversation;
 };
 
-exports.getConversationList = async () => {
-  const res = await kakaoInstance.get('/v1/conversations.list');
+exports.getConversationList = async ({ limit = null, cursor = null } = {}) => {
+  const res = await kakaoInstance.get(
+    '/v1/conversations.list?' +
+      (limit ? `limit=${limit}&` : '') +
+      (cursor ? `cursor=${cursor}` : ''),
+  );
   if (!res.data.success) {
     throw new Error(res.data.error.message);
   }
-  return res.data.conversations;
+  return res.data;
 };
 
 exports.getConversationUsers = async (conversation_id) => {

@@ -1,6 +1,8 @@
 const { detail } = require('../../controller/users');
 const messages = require('../kakaoWork/messages');
-const { getWeather, getClothes } = require('../../getData');
+const { detail: getWeather } = require('../../controller/weathers');
+const { getClothes } = require('../weather');
+const dateFormat = require('dateformat');
 
 exports.sendIntroMessage = async (conversationId) => {
   const { city } = await detail({ conversation_id: conversationId });
@@ -160,6 +162,7 @@ exports.sendCitySetResultMessage = async (conversationId, city) => {
 
 exports.sendWhatIsTheWeatherNowMessage = async (conversationId, city) => {
   const { temp, feels_like, pm10_status, pm2_5_status } = await getWeather(
+    dateFormat(new Date(), 'yyyy-mm-dd HH'),
     city,
   );
 
@@ -241,7 +244,7 @@ exports.sendWhatIsTheWeatherTodayMessage = async (conversationId, city) => {
     today_feels_like,
     pm10_status,
     pm2_5_status,
-  } = await getWeather(city);
+  } = await getWeather(dateFormat(new Date(), 'yyyy-mm-dd HH'), city);
   const { text, img } = getClothes(today_feels_like);
 
   await messages.sendMessage({
@@ -453,7 +456,11 @@ exports.sendDustAlarmSetResultMessage = async (
   });
 };
 
-exports.sendDailyAlarmMessage = async (conversationId) => {
+exports.sendDailyAlarmMessage = async (
+  conversationId,
+  { temp_max, temp_min, today_feels_like },
+) => {
+  const { img, text } = getClothes(today_feels_like);
   //@TODO: 날씨 정보 데이터 받아오기
   await messages.sendMessage({
     conversationId,
@@ -469,7 +476,7 @@ exports.sendDailyAlarmMessage = async (conversationId) => {
         term: '최저기온',
         content: {
           type: 'text',
-          text: `${'temp_min'}°C`,
+          text: `${temp_min}°C`,
           markdown: false,
         },
         accent: true,
@@ -479,7 +486,7 @@ exports.sendDailyAlarmMessage = async (conversationId) => {
         term: '최고기온',
         content: {
           type: 'text',
-          text: `${'temp_max'}°C`,
+          text: `${temp_max}°C`,
           markdown: false,
         },
         accent: true,
@@ -489,7 +496,7 @@ exports.sendDailyAlarmMessage = async (conversationId) => {
         term: '체감온도',
         content: {
           type: 'text',
-          text: `${'today_feels_like'}°C`,
+          text: `${today_feels_like}°C`,
           markdown: false,
         },
         accent: true,
@@ -504,7 +511,7 @@ exports.sendDailyAlarmMessage = async (conversationId) => {
       },
       {
         type: 'image_link',
-        url: 'img',
+        url: img,
       },
       {
         type: 'text',
@@ -515,10 +522,9 @@ exports.sendDailyAlarmMessage = async (conversationId) => {
   });
 };
 
-exports.sendRainAlarmMessage = async (conversationId) => {
+exports.sendRainAlarmMessage = async (conversationId, { is_rainy }) => {
   //@TODO: 비 정보 데이터 받아오기
   //임시 변수
-  const isRainy = true;
   await messages.sendMessage({
     conversationId,
     text: '오늘의 비 소식',
@@ -535,7 +541,7 @@ exports.sendRainAlarmMessage = async (conversationId) => {
       },
       {
         type: 'text',
-        text: isRainy
+        text: is_rainy
           ? '오늘은 *비가 오겠습니다.*\n우산을 챙겨서 외출하세요!'
           : '오늘은 *비가 오지 않겠습니다.*',
         markdown: true,
@@ -544,11 +550,12 @@ exports.sendRainAlarmMessage = async (conversationId) => {
   });
 };
 
-exports.sendDustAlarmMessage = async (conversationId) => {
+exports.sendDustAlarmMessage = async (
+  conversationId,
+  { pm10_status, pm2_5_status },
+) => {
   //@TODO: 미세먼지 정보 데이터 받아오기
   //임시 변수
-  const pm10_status = '아주 나쁨';
-  const pm2_5_status = '나쁨';
   await messages.sendMessage({
     conversationId,
     text: '오늘의 미세먼지 소식',
