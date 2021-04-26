@@ -1,4 +1,4 @@
-const { getCityData } = require('../../getData');
+const { getCityData } = require('../weather');
 
 exports.sendCitySettingModal = (res) => {
   const cityData = getCityData();

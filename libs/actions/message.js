@@ -1,6 +1,6 @@
 const { detail } = require('../../controller/users');
 const messages = require('../kakaoWork/messages');
-const { getWeather, getClothes } = require('../../getData');
+const { getWeather, getClothes } = require('../weather');
 
 exports.sendIntroMessage = async (conversationId) => {
   const { city } = await detail({ conversation_id: conversationId });
