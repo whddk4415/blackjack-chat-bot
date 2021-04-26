@@ -25,18 +25,16 @@ const create = async (data) => {
   try {
     const {
       user_id,
-      sex,
+      conversation_id,
       city,
-      time,
       daily_alarm,
       rain_alarm,
       dust_alarm,
     } = data;
     const userData = new UserModel({
       user_id,
-      sex,
+      conversation_id,
       city,
-      time,
       daily_alarm,
       rain_alarm,
       dust_alarm,
