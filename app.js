@@ -7,7 +7,13 @@ const bodyParser = require('body-parser');
 const index = require('./routes/index');
 const request = require('./routes/request');
 const callback = require('./routes/callback');
-const { initWeather, getWeatherPerHour } = require('./common/utils');
+const {
+  initWeather,
+  getWeatherPerHour,
+  sendRainAlarmMessageEveryDay,
+  sendDustAlarmMessageEveryDay,
+  sendDailyAlarmMessageEveryDay,
+} = require('./common/utils');
 const app = express();
 
 // mongoDB connect
@@ -24,6 +30,9 @@ db.once('open', function () {
 
 initWeather();
 getWeatherPerHour();
+sendRainAlarmMessageEveryDay();
+sendDustAlarmMessageEveryDay();
+sendDailyAlarmMessageEveryDay();
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
