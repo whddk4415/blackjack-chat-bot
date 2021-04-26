@@ -1,17 +1,15 @@
 const { getUserList } = require('../../libs/kakaoWork/users');
-const { create } = require('../../controller/users');
+const { detail, create } = require('../../controller/users');
 
-exports.initUsers = async () => {
-  const { users: chatUserList } = await getUserList();
-  for (const user of chatUserList) {
+exports.initUsers = async (userId, conversationId) => {
+  if (!(await detail({ user_id: userId }))) {
     create({
-      user_id: user.id,
+      user_id: userId,
       rain_alarm: false,
       dust_alarm: false,
       daily_alarm: true,
-      time: '--:--',
       city: null,
-      sex: null,
+      conversation_id: conversationId,
     });
   }
 };
