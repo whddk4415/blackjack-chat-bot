@@ -27,33 +27,23 @@ exports.getWeather = async (local) => {
     return false;
   }
 
-  const key = Config.keys.weather.key;
+  const { key } = Config.keys.weather;
 
   // 날씨 api
-  const temp_url =
-    'https://api.openweathermap.org/data/2.5/onecall?lat=' +
-    lat +
-    '&lon=' +
-    lon +
-    '&units=metric&exclude=minutely&appid=' +
-    key;
+  const temp_url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&exclude=minutely&appid=${key}`;
   // 미세먼지 api
-  const pol_url =
-    'http://api.openweathermap.org/data/2.5/air_pollution?lat=' +
-    lat +
-    '&lon=' +
-    lon +
-    '&appid=' +
-    key;
+  const pol_url = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${key}`;
 
   const { current, daily } = (await axios.get(temp_url)).data;
-  const today = daily[0];
   const { components: pol_data } = (await axios.get(pol_url)).data.list[0];
-  const rain = today.rain || 0;
+  const today = daily[0];
 
+  //현재
   const { temp, feels_like } = current;
+  //오늘
   const { min: temp_min, max: temp_max } = today.temp;
   const { day, night, eve, morn } = today.feels_like;
+  const rain = today.rain || 0;
 
   const today_feels_like = parseFloat(
     ((day + night + eve + morn) / 4).toFixed(2),
