@@ -7,9 +7,10 @@ exports.initUsers = async (userId, conversationId) => {
       user_id: userId,
       rain_alarm: false,
       dust_alarm: false,
-      daily_alarm: true,
-      city: null,
+      daily_alarm: false,
+      city: null, 
       conversation_id: conversationId,
     });
   }
 };
+
