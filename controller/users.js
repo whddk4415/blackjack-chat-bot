@@ -11,9 +11,9 @@ const list = async () => {
 };
 
 // 상세 조회(하나만)
-const detail = async (user_id) => {
+const detail = async (search) => {
   try {
-    const user = await UserModel.findOne({ user_id });
+    const user = await UserModel.findOne(search);
     return user;
   } catch (e) {
     console.error(e);
