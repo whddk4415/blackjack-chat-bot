@@ -396,8 +396,8 @@ exports.sendDailyAlarmSetResultMessage = async (
       },
       {
         type: 'text',
-        text: `날씨 알람이 ${daily_alarm ? '설정' : '해제'}되었습니다.${
-          daily_alarm ? '\n07:00에 날씨 알림을 보내드립니다.' : ''
+        text: `날씨 알람이 *${daily_alarm ? '설정' : '해제'}*되었습니다.${
+          daily_alarm ? '\n*07:00*에 날씨 알림을 보내드립니다.' : ''
         }`,
         markdown: true,
       },
@@ -421,7 +421,7 @@ exports.sendRainAlarmSetResultMessage = async (
       {
         type: 'text',
         text: `비 알람이 ${rain_alarm ? '설정' : '해제'}되었습니다.${
-          rain_alarm ? '\n07:00에 비 알림을 보내드립니다.' : ''
+          rain_alarm ? '\n*07:00*에 비 알림을 보내드립니다.' : ''
         }`,
         markdown: true,
       },
@@ -444,8 +444,8 @@ exports.sendDustAlarmSetResultMessage = async (
       },
       {
         type: 'text',
-        text: `미세먼지 알람이 ${dust_alarm ? '설정' : '해제'}되었습니다.${
-          dust_alarm ? '\n07:00에 미세먼지 알림을 보내드립니다.' : ''
+        text: `미세먼지 알람이 *${dust_alarm ? '설정' : '해제'}*되었습니다.${
+          dust_alarm ? '\n*07:00*에 미세먼지 알림을 보내드립니다.' : ''
         }`,
         markdown: true,
       },
