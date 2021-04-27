@@ -20,8 +20,10 @@ const app = express();
 mongoose.connect('mongodb://localhost/chatbot', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 mongoose.set('useCreateIndex', true);
+
 const db = mongoose.connection;
 db.on('error', console.error);
 db.once('open', function () {
@@ -34,7 +36,7 @@ sendRainAlarmMessageEveryDay();
 sendDustAlarmMessageEveryDay();
 sendDailyAlarmMessageEveryDay();
 
-app.use(logger('dev'));
+app.use(logger('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

@@ -24,6 +24,9 @@ const initWeather = async () => {
       weatherCreate(weather);
     }
   }
+  console.log(
+    `${dateFormat(new Date(), 'yyyy-mm-dd HH:MM:ss')} weather 정보 수집 완료`,
+  );
 };
 
 exports.initWeather = initWeather;
@@ -46,6 +49,14 @@ exports.sendDailyAlarmMessageEveryDay = async () => {
           await weatherDetail(currentTime, city),
         );
       }
+      console.log(
+        `${dateFormat(
+          new Date(),
+          'yyyy-mm-dd HH:MM:ss',
+        )} Daily Alarm Message 전송 완료, 총 ${
+          users.length
+        } 명에게 전송하였음.`,
+      );
     },
   );
 };
@@ -62,6 +73,12 @@ exports.sendRainAlarmMessageEveryDay = async () => {
           await weatherDetail(currentTime, city),
         );
       }
+      console.log(
+        `${dateFormat(
+          new Date(),
+          'yyyy-mm-dd HH:MM:ss',
+        )} Rain Alarm Message 전송 완료, 총 ${users.length} 명에게 전송하였음.`,
+      );
     },
   );
 };
@@ -78,6 +95,12 @@ exports.sendDustAlarmMessageEveryDay = async () => {
           await weatherDetail(currentTime, city),
         );
       }
+      console.log(
+        `${dateFormat(
+          new Date(),
+          'yyyy-mm-dd HH:MM:ss',
+        )} Dust Alarm Message 전송 완료, 총 ${users.length} 명에게 전송하였음.`,
+      );
     },
   );
 };
