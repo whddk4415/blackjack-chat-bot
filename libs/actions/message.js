@@ -19,7 +19,7 @@ exports.sendIntroMessage = async (conversationId) => {
       {
         type: 'image_link',
         url:
-          'https://t1.kakaocdn.net/kakaowork/resources/block-kit/imagelink/image7@3x.jpg',
+          'https://user-images.githubusercontent.com/47051596/116243818-4dfe8b00-a7a2-11eb-8d2d-5f45f197f9aa.png',
       },
       {
         type: 'text',
