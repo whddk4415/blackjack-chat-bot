@@ -19,7 +19,7 @@ exports.sendIntroMessage = async (conversationId) => {
       {
         type: 'image_link',
         url:
-          'https://user-images.githubusercontent.com/47051596/116243818-4dfe8b00-a7a2-11eb-8d2d-5f45f197f9aa.png',
+          'https://user-images.githubusercontent.com/47051596/116247611-fcf09600-a7a5-11eb-9dec-6a52fe7d4430.jpg',
       },
       {
         type: 'text',
