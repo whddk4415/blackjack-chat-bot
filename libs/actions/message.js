@@ -97,12 +97,12 @@ exports.sendWhatIsTheWeatherIntroMessage = (conversationId) => {
       },
       {
         type: 'text',
-        text: '*1. 지금 어떄?* : 현재 날씨 상태를 알려드립니다.',
+        text: '*1. 지금 어때?* : 현재 날씨 상태를 알려드립니다.',
         markdown: true,
       },
       {
         type: 'text',
-        text: '*2. 오늘 어떄?* : 오늘의 전반적인 날씨 상태를 알려드립니다.',
+        text: '*2. 오늘 어때?* : 오늘의 전반적인 날씨 상태를 알려드립니다.',
         markdown: true,
       },
       {
