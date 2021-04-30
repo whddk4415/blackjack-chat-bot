@@ -9,7 +9,7 @@ exports.sendIntroMessage = async (conversationId) => {
 
   return messages.sendMessage({
     conversationId,
-    text: '🌞 SWM 날씨 챗봇 🌨',
+    text: 'Blackjack팀🌞 날씨 챗봇 🌨',
     blocks: [
       {
         type: 'header',
@@ -82,7 +82,7 @@ exports.sendIntroMessage = async (conversationId) => {
 exports.sendWhatIsTheWeatherIntroMessage = (conversationId) => {
   messages.sendMessage({
     conversationId,
-    text: '날씨 어때?',
+    text: 'Blackjack팀🌞 날씨 챗봇 🌨',
     blocks: [
       {
         type: 'header',
@@ -144,7 +144,7 @@ exports.sendWhatIsTheWeatherIntroMessage = (conversationId) => {
 exports.sendCitySetResultMessage = async (conversationId, city) => {
   messages.sendMessage({
     conversationId,
-    text: '도시 설정',
+    text: 'Blackjack팀🌞 날씨 챗봇 🌨',
     blocks: [
       {
         type: 'header',
@@ -169,7 +169,7 @@ exports.sendWhatIsTheWeatherNowMessage = async (conversationId, city) => {
   const { text, img } = getClothes(feels_like);
   await messages.sendMessage({
     conversationId,
-    text: '지금 날씨 어때?',
+    text: 'Blackjack팀🌞 날씨 챗봇 🌨',
     blocks: [
       {
         type: 'header',
@@ -249,7 +249,7 @@ exports.sendWhatIsTheWeatherTodayMessage = async (conversationId, city) => {
 
   await messages.sendMessage({
     conversationId,
-    text: '오늘 어때?',
+    text: 'Blackjack팀🌞 날씨 챗봇 🌨',
     blocks: [
       {
         type: 'header',
@@ -333,7 +333,7 @@ exports.sendSetAlarmIntroMessage = (
 ) => {
   messages.sendMessage({
     conversationId,
-    text: '날씨 알람 설정',
+    text: 'Blackjack팀🌞 날씨 챗봇 🌨',
     blocks: [
       {
         type: 'header',
@@ -390,7 +390,7 @@ exports.sendDailyAlarmSetResultMessage = async (
 ) => {
   await messages.sendMessage({
     conversationId,
-    text: '날씨 알람 설정',
+    text: 'Blackjack팀🌞 날씨 챗봇 🌨',
     blocks: [
       {
         type: 'header',
@@ -414,7 +414,7 @@ exports.sendRainAlarmSetResultMessage = async (
 ) => {
   await messages.sendMessage({
     conversationId,
-    text: '비 알람 설정',
+    text: 'Blackjack팀🌞 날씨 챗봇 🌨',
     blocks: [
       {
         type: 'header',
@@ -438,7 +438,7 @@ exports.sendDustAlarmSetResultMessage = async (
 ) => {
   await messages.sendMessage({
     conversationId,
-    text: '미세먼지 알람 설정',
+    text: 'Blackjack팀🌞 날씨 챗봇 🌨',
     blocks: [
       {
         type: 'header',
@@ -464,7 +464,7 @@ exports.sendDailyAlarmMessage = async (
   //@TODO: 날씨 정보 데이터 받아오기
   await messages.sendMessage({
     conversationId,
-    text: '오늘 어때?',
+    text: 'Blackjack팀🌞 날씨 챗봇 🌨',
     blocks: [
       {
         type: 'header',
@@ -527,7 +527,7 @@ exports.sendRainAlarmMessage = async (conversationId, { is_rainy }) => {
   //임시 변수
   await messages.sendMessage({
     conversationId,
-    text: '오늘의 비 소식',
+    text: 'Blackjack팀🌞 날씨 챗봇 🌨',
     blocks: [
       {
         type: 'header',
@@ -558,7 +558,7 @@ exports.sendDustAlarmMessage = async (
   //임시 변수
   await messages.sendMessage({
     conversationId,
-    text: '오늘의 미세먼지 소식',
+    text: 'Blackjack팀🌞 날씨 챗봇 🌨',
     blocks: [
       {
         type: 'header',
